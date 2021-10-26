@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Compte - Andy's Crochet{% endblock %}
+
+{% block content %}
+  Bienvenue {{ app.user.firstname }} dans votre compte
+    {# la variable app me permet d'avoir accès à l'user courant, a la session#}
+  <a href="{{ path('account_password') }}"> Modifier mon mot de passe</a>
+{% endblock %}
