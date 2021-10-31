@@ -11,6 +11,9 @@
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/andyscrochet.css') }}">
+    {% block css %}
+
+    {% endblock %}
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -40,7 +43,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Nos produits</a>
+                    <a class="nav-link" href="{{ path('products') }}">Nos produits</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Qui sommes-nous ?</a>
