@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos produits - Anndy's Crochet{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ asset('assets/products/product.css') }}">
+{% endblock %}
+{% block content %}
+
+
+<div class="example-wrapper">
+    {%  for message in app.flashes('message')%}
+        <div class="error">
+            <div class="alert alert-info" role="alert">
+                {{ message }}
+            </div>
+        </div>
+    {% endfor %}
+    <div class="row">
+        <div class="col-md-3">
+            <h3>Filtrer</h3>
+            {{ form(search_form) }}
+        </div>
+        <div class="col-md-9">
+            <div class="main-title">
+                <h3>Nos produits</h3>
+            </div>
+            <div class ="row product-container">
+                {% for product in products %}
+                    <div class="col-md-4">
+                        <div class="product-item text-center">
+                            <a href="{{ path('product', {'slug' : product.slug}) }}"><img src="/uploads/products/{{ product.illustration }}" alt ="{{ product.subtitle }}" class="img-fluid"></a>
+                            <h5>{{ product.name }}</h5>
+
+                            <span class="product-subtitle">{{ product.subtitle }}</span>
+                            <span class="product-price">{{ (product.price/100)|number_format(2,',','.') }} € </span>
+
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
