@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Classe\Search;
 use App\Entity\Product;
+use App\Form\SearchType;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,10 +26,22 @@ class ProductController extends AbstractController
     public function index(Request $request): Response
     {
 
-        $products = $this->repository->findAll();
 
+
+        $search = new Search();
+        $searchForm = $this->createForm(SearchType::class, $search);
+
+        //Traitement du formulaire de la recherche
+        $searchForm->handleRequest($request);
+        if($searchForm->isSubmitted() && $searchForm->isValid() ){
+            $products = $this->repository->findWithSearch($search);
+
+        }else{
+            $products = $this->repository->findAll();
+        }
         return $this->render('product/index.html.twig',[
             'products' => $products,
+            'search_form' => $searchForm->createView(),
         ]);
     }
 
