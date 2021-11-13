@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Account;
 
 use App\Form\ResetPasswordType;
 use Doctrine\ORM\EntityManagerInterface;
