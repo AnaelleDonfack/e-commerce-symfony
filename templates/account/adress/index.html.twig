@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes addresses - Andy's Crochet{% endblock %}
+
+{% block content %}
+    <h1>Mes addresses</h1>
+    <a href="{{ path('account_adress_add') }}" class="btn btn-info btn-sm float-right"> Ajouter une addresse</a>
+
+    {# la variable app me permet d'avoir accès à l'user courant, a la session#}
+    <a href="{{ path('account') }}"> Retour</a>
+    <hr>
+    {%  for message in app.flashes('message')%}
+        <div class="error">
+            <div class="alert alert-info" role="alert">
+                {{ message }}
+            </div>
+        </div>
+    {% endfor %}
+
+    {% if app.user.adresses|length == 0 %}
+         <p class ="text-center">
+            Vous n'avez pas encore ajouté d'addresse dans votre compte client, Pour en ajouter une veuillez <a href="{{ path('account_adress_add') }}">cliquer ici</a>
+         </p>
+    {% else %}
+
+            <div class="row">
+            {% for address in app.user.adresses %}
+                 <div class="col-md-4">
+                     <div class="card" style="width: 18rem;">
+                         <div class="card-body">
+                             <h5 class="card-title">{{ address.name }}</h5>
+
+                             <p class="card-text">
+                                 {{ address.address }} <br>
+                                 {{ address.postal }} - {{ address.city }} <br> {{ address.country }}
+                             </p>
+                             <a href="{{ path('account_adress_edit', {'id' : address.id}) }}">Modifier</a>|<a href="{{ path('account_adress_delete',{'id' : address.id}) }}">Supprimer</a>
+
+                         </div>
+                     </div>
+                 </div>
+            {% endfor %}
+            </div>
+
+
+    {% endif %}
+{% endblock %}
