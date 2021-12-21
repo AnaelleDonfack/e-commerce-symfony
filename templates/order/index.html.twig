@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Valider ma comande - Andy's Crochet{% endblock %}
+
+{% block content %}
+
+
+<h2>Je passe ma commande</h2>
+<p> Choisissez vos préférences avant de passer votre commande</p>.
+<hr>
+
+<div class="row">
+    <div class="col-md-6">
+        <b>Choisir une adresse de livraison</b>
+        {% set formHtml %}
+            {{ form(form) }}
+        {% endset %}
+        {{ formHtml|replace({'[br]' : '<br/>'})|raw }}
+        <b>Choisir mon transporteur</b>
+    </div>
+    <div class="col-md-6">
+        <b>Recap de ma commannde</b>
+
+    </div>
+{% endblock %}
