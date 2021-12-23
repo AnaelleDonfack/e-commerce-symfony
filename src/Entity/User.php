@@ -160,7 +160,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
-
+    public function getFullname(): string {
+        return $this->getFirstname().' '.$this->getLastname();
+    }
     public function getFirstname(): ?string
     {
         return $this->firstname;

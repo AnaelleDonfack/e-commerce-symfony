@@ -63,6 +63,14 @@ class Order
         $this->createdAt = new \DateTime();
     }
 
+    public function getTotal(){
+        $total = null;
+        foreach ($this->getOrderDetails()->getValues() as $product){
+            $total = $total + ($product->getPrice() * $product->getQuantity());
+        }
+        return $total;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
