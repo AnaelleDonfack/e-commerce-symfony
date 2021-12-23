@@ -6,6 +6,7 @@ use App\Entity\Carrier;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Entity\Adress;
 
@@ -16,7 +17,7 @@ class OrderType extends AbstractType
         $user = $options['user'];
         $builder
             ->add('addresses', EntityType::class,[
-                'label' => 'Choisissez votre adresse de livraison',
+                'label' => false,
                 'required' => true,
                 'class' => Adress::class,
                 'choices' => $user->getAdresses(),
@@ -29,6 +30,12 @@ class OrderType extends AbstractType
                 'class' => Carrier::class,
                 'multiple' => false,
                 'expanded' => true
+            ])
+            ->add('submit', SubmitType::class, [
+                'label' => 'valider ma commande',
+                'attr' => [
+                    'class' => 'btn btn-success btn-block'
+                ]
             ])
         ;
     }
