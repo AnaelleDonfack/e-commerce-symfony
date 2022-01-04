@@ -57,6 +57,16 @@ class Order
      */
     private $isPaid;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $referenceStripe;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $stripeSessionId;
+
     public function __construct()
     {
         $this->orderDetails = new ArrayCollection();
@@ -174,6 +184,30 @@ class Order
     public function setIsPaid(bool $isPaid): self
     {
         $this->isPaid = $isPaid;
+
+        return $this;
+    }
+
+    public function getReferenceStripe(): ?string
+    {
+        return $this->referenceStripe;
+    }
+
+    public function setReferenceStripe(string $referenceStripe): self
+    {
+        $this->referenceStripe = $referenceStripe;
+
+        return $this;
+    }
+
+    public function getStripeSessionId(): ?string
+    {
+        return $this->stripeSessionId;
+    }
+
+    public function setStripeSessionId(?string $stripeSessionId): self
+    {
+        $this->stripeSessionId = $stripeSessionId;
 
         return $this;
     }
