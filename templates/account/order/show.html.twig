@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Valider ma comande - Andy's Crochet{% endblock %}
+{% block javascript %}
+<script src="https://js.stripe.com/v3/"></script>
+{% endblock %}
+{% block content %}
+    <h2>Ma commande {{ order.referenceStripe }}</h2>
+    <a href="{{ path('account_order') }}">Retour</a>
+
+
+
+
+    <strong>Commande passée le </strong>{{ order.createdAt|date('d/m/Y') }}<br>
+    <strong>Réference  </strong><small>{{ order.referenceStripe }}</small><br>
+    <strong>Transporteur choisi : </strong>{{ order.carrierName }}
+    <hr>
+    <strong>Details</strong>
+
+
+    <table class="table mt-4">
+        <thead>
+            <tr>
+                <th scope="col">Produit</th>
+                <th scope="col">Quantité</th>
+                <th scope="col">Prix unitaire</th>
+                <th scope="col">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in order.orderDetails %}
+            <tr>
+                <td>{{ product.product }}</td>
+                <td>x {{ product.quantity }}</td>
+                <td>{{ (product.price/100)|number_format(2,',','.') }} €</td>
+                <td>{{ ((product.total)/100)|number_format(2,',','.') }} €</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+    <div class="text-right">
+        <strong>Sous-Total : </strong> {{ order.getTotal }}<br>
+        <strong>Livraison :</strong> {{ (order.carrierPrice/100)|number_format(2,',','.') }} €<br>
+        <strong>Total : </strong> {{ ((order.getTotal +order.carrierPrice)/100)|number_format(2,',','.')  }} €
+    </div>
+
+
+
+{% endblock %}
+

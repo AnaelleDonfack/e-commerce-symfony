@@ -60,6 +60,9 @@ class OrderController extends AbstractController
 
             //Enregistrer ma commande : Orders
             $order = new Order();
+            $date = new \DateTime();
+            $reference = $date->format('dmY').'-'.uniqid();
+            $order->setReferenceStripe($reference);
             $order->setClient($this->getUser());
             $order->setCarrierName($carrier->getName());
             $order->setCarrierPrice($carrier->getPrice());
@@ -67,7 +70,6 @@ class OrderController extends AbstractController
             $order->setIsPaid(0);
 
             $this->entityManager->persist($order);
-
             //Enregistrer mes produits : OrderDetails
             foreach ($cart->getFull() as $product){
                 $orderDetails = new OrderDetails();
@@ -78,12 +80,14 @@ class OrderController extends AbstractController
                 $orderDetails->setTotal($product['product']->getPrice() * $product['quantity']);
                 $this->entityManager->persist($orderDetails);
             }
+
             $this->entityManager->flush();
 
             return $this->render('order/add.html.twig',[
                 'cart' => $cart->getFull(),
                 'carrier' => $carrier,
                 'delivery' => $delivery_content,
+                'reference_stripe' => $order->getReferenceStripe(),
             ]);
         }
 

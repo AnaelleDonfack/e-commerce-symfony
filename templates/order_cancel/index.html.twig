@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation de commande {{ order.referenceStripe }} - Andy's Crochet{% endblock %}
+
+{% block content %}
+    <h2>Echec de paiement</h2>
+
+
+    <p>
+        Bonjour <strong>{{ order.client.firstname }} {{ order.client.lastname }}</strong>. <br><br>
+        Il semblerait que votre commande n° <strong>{{ order.referenceStripe }}</strong> ait échoué. <br>
+        Une confirmation d'echec de paiement vient de vous être envoyé par email à l'adresse <strong>{{ order.client.email }}</strong>
+
+    <hr>
+    <a href="{{ path('order') }}" class="btn btn-success">Réessayer le paiement</a>
+
+
+    </p>
+
+{% endblock %}

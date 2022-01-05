@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation de commande {{ order.referenceStripe }} - Andy's Crochet{% endblock %}
+
+{% block content %}
+    <h2>Confirmation de commande</h2>
+
+
+    <p>
+        Bonjour <strong>{{ order.client.firstname }} {{ order.client.lastname }}</strong>. <br><br>
+        Nous vous remercions pour votre commande n° <strong>{{ order.referenceStripe }}</strong>. <br>
+        Une confirmation vient de vous être envoyé par email à l'adresse <strong>{{ order.client.email }}</strong>
+
+        <hr>
+        Votre commande sera livrée par <strong>{{ order.carrierName }}</strong> à l'adresse suivante : <br>
+        {{ order.delivery|raw }}
+
+        <hr>
+        Pour suivre votre commande, rendez-vous dans votre <a href="{{ path('account_order') }}">compte</a>
+    </p>
+
+{% endblock %}
