@@ -47,4 +47,15 @@ class OrderRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findSuccessOrders($user){
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.isPaid = true')
+            ->andWhere('o.client = :user')
+            ->setParameter('user', $user->getId())
+            ->orderBy('o.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+    }
 }

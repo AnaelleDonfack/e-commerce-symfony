@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes commandes - Andy's Crochet{% endblock %}
+
+{% block content %}
+    <h1>Mes commandes</h1>
+
+    {# la variable app me permet d'avoir accès à l'user courant, a la session#}
+    <a href="{{ path('account') }}"> Retour</a>
+
+    {%  for message in app.flashes('message')%}
+        <div class="error">
+            <div class="alert alert-info" role="alert">
+                {{ message }}
+            </div>
+        </div>
+    {% endfor %}
+
+    {% if orders|length == 0 %}
+        <hr>
+        <p class ="text-center">
+            Vous n'avez pas encore ajouté d'addresse dans votre compte client, Pour en ajouter une veuillez <a href="{{ path('account_adress_add') }}">cliquer ici</a>
+        </p>
+    {% else %}
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                    <th scope="col">Réference</th>
+                    <th scope="col">Passée le</th>
+                    <th scope="col">Produit(s)</th>
+                    <th scope="col">Total</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for order in orders %}
+                <tr>
+
+                    <td><span class="badge badge-secondary">{{ order.referenceStripe }}</span></td>
+                    <td>{{ order.createdAt|date('d/m/Y') }}</td>
+                    <td>{{ order.orderDetails|length }}</td>
+                    <td>{{ ((order.getTotal + order.carrierPrice)/100)|number_format(2,',','.') }} €</td>
+                    <td class="text-right"><a href="{{ path('account_order_show',{'reference' : order.referenceStripe }) }}">Voir ma commande</a> </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+
+    {% endif %}
+{% endblock %}
