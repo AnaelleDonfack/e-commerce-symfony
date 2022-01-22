@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Header;
 use App\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,10 +23,11 @@ class HomeController extends AbstractController
     public function index(): Response
     {
         $products = $this->entityManager->getRepository(Product::class)->findBy(['isBest'=>true]);
-
+        $headers = $this->entityManager->getRepository(Header::class)->findAll();
 
         return $this->render('home/index.html.twig',[
             'products' => $products,
+            'headers' => $headers,
         ]);
     }
 }
