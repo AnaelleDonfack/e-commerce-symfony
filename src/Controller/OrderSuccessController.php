@@ -34,6 +34,7 @@ class OrderSuccessController extends AbstractController
             //Vider la session cart
             $cart->remove();
             $order->setIsPaid(1);
+            $order->setState(1);
 
             $this->entityManager->flush();
             //Envoyer un email au client pour lui confirmer sa commande
