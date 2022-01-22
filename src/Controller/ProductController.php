@@ -49,7 +49,7 @@ class ProductController extends AbstractController
     public function show($slug){
 
         $product = $this->repository->findOneBySlug($slug);
-
+        $products = $this->entityManager->getRepository(Product::class)->findBy(['isBest'=>true]);
         if(!$product){
             $this->addFlash('message', "Oups...il semblerait que ce produit n'existe pas");
             return $this->redirectToRoute('products');
@@ -57,6 +57,7 @@ class ProductController extends AbstractController
 
         return $this->render('product/show.html.twig',[
             'product' => $product,
+            'products' => $products,
         ]);
     }
 }

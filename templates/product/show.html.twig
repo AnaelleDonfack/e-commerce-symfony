@@ -32,5 +32,20 @@
 
             </div>
         </div>
+        <hr>
+        <h3>Nos meilleures ventes</h3>
+        <p>Découvrez les articles les plus vendus</p>
+        <div class="row">
+            {% set product_current = product %}
+            {% for product in products %}
+                {% if product_current.id == product.id %}
+
+                {% else %}
+                <div class="col-md-3">
+                    {% include 'product/single_product.html.twig'%}
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div><!-- /.row -->
     </div>
 {% endblock %}
