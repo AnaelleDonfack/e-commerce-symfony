@@ -5,6 +5,10 @@
 {% block content %}
   Bienvenue {{ app.user.firstname }} dans votre compte
     {# la variable app me permet d'avoir accès à l'user courant, a la session#}
+  <br>
+  {% if is_granted('ROLE_ADMIN') %}
+  <a href="/admin"> Accédez à l'administration</a><br>
+  {% endif %}
   <a href="{{ path('account_password') }}"> Modifier mon mot de passe</a><br>
   <a href="{{ path('account_adress') }}"> Gerer Mes addresses</a><br>
   <a href="{{ path('account_order') }}"> Gerer Mes commandes</a>
