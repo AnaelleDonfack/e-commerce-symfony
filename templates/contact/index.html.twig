@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nous contacter - Andy's Crochet{% endblock %}
+
+{% block content %}
+    <h2>Nous Contacter</h2>
+    <p>N'hésitez pas à prendre contact avec notre équipe, nous vous répondrons dans les meilleurs délais</p>
+
+    {%  for message in app.flashes('notice')%}
+        <div class="error">
+            <div class="alert alert-info" role="alert">
+                {{ message }}
+            </div>
+        </div>
+    {% endfor %}
+    <div class="row">
+
+        <div class="col-md-8">
+            {{ form(form) }}
+        </div>
+        <br class="col-md-4">
+            <strong>Andy's Crochet</strong>
+            <hr>
+            06 45 56 78 91 <br/>
+            Maroc<br/>
+            contact@andyscrochet.fr<br/>
+        </div>
+    </div>
+{% endblock %}
