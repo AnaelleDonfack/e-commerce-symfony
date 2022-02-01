@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Classe\Cart;
+use App\Controller\Classe\Cart;
 use App\Entity\Order;
 use App\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;

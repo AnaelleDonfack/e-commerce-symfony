@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Classe\Cart;
-use App\Classe\Mail;
+use App\Controller\Classe\Cart;
+use App\Controller\Classe\Mail;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

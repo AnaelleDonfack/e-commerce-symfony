@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Classe\Search;
+use App\Controller\Classe\Search;
 use App\Entity\Product;
 use App\Form\SearchType;
 use App\Repository\ProductRepository;

@@ -2,7 +2,7 @@
 
 namespace App\Controller\Account;
 
-use App\Classe\Cart;
+use App\Controller\Classe\Cart;
 use App\Entity\Adress;
 use App\Form\AdressType;
 use Doctrine\ORM\EntityManagerInterface;
