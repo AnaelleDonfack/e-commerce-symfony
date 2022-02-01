@@ -3,13 +3,33 @@
 {% block title %}Mon Compte - Andy's Crochet{% endblock %}
 
 {% block content %}
-  Bienvenue {{ app.user.firstname }} dans votre compte
-    {# la variable app me permet d'avoir accès à l'user courant, a la session#}
-  <br>
+
   {% if is_granted('ROLE_ADMIN') %}
-  <a href="/admin"> Accédez à l'administration</a><br>
+    <small><a href="/admin"> Accédez à l'administration</a></small><br>
   {% endif %}
-  <a href="{{ path('account_password') }}"> Modifier mon mot de passe</a><br>
-  <a href="{{ path('account_adress') }}"> Gerer Mes addresses</a><br>
-  <a href="{{ path('account_order') }}"> Gerer Mes commandes</a>
+  Bienvenue {{ app.user.firstname }} dans votre compte
+  {# la variable app me permet d'avoir accès à l'user courant, a la session#}
+  <hr>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="account-item text-center">
+        <img src="{{ asset('assets/img/padlock.png') }}" alt="Modifier mon mot de passe"><br>
+        <a href="{{ path('account_password') }}"> Modifier mon mot de passe</a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="account-item text-center">
+        <img src="{{ asset('assets/img/address.png') }}" alt="Gerer Mes addresses"><br>
+        <a href="{{ path('account_adress') }}"> Mes addresses</a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="account-item text-center">
+        <img src="{{ asset('assets/img/purchase.png') }}" alt="Gerer Mes commandes"><br>
+        <a href="{{ path('account_order') }}"> Mes commandes</a>
+      </div>
+    </div>
+  </div>
+  <hr>
+
 {% endblock %}
